@@ -67,7 +67,10 @@ public class MainMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+//					System.out.println("Hello");
 					MainMenu frame = new MainMenu();
+//					String name = loggedInCashier;
+//					System.out.println(name);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -533,6 +536,8 @@ public class MainMenu extends JFrame {
 					String customerName = customerNameTxt.getText();
 					Double amount = Double.parseDouble(totalBillAmtTxt.getText());
 					LocalDate date = LocalDate.parse(dateTxt.getText());
+					String name = new LoginFormCashier().getCashierName();
+					System.out.println(name);
 					
 					BillService service = new BillServiceImpl();
 					Bill b = new Bill();
@@ -544,7 +549,7 @@ public class MainMenu extends JFrame {
 					service.addBill(b);
 					JOptionPane.showMessageDialog(null, "Bill added successfully!");
 					
-					ReceiptPrinter printer = new ReceiptPrinter(table, customerName, billNo, amount);
+					ReceiptPrinter printer = new ReceiptPrinter(table, customerName, billNo, amount, name);
 			        printer.printReceipt();
 //					table.print();
 					dispose();

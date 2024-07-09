@@ -31,6 +31,7 @@ public class LoginFormCashier extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameTxt;
 	private JTextField passwordTxt;
+	public static String cashierName;
 
 	/**
 	 * Launch the application.
@@ -105,10 +106,14 @@ public class LoginFormCashier extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+
 			public void actionPerformed(ActionEvent e) {
 				String un = usernameTxt.getText();
 				String pw = passwordTxt.getText();
+				cashierName = un;
 				System.out.println(un);
+				System.out.println(cashierName);
 				System.out.println(pw);
 				
 				if(authenticateUser(un, pw)) {
@@ -191,6 +196,10 @@ public class LoginFormCashier extends JFrame {
 //	    
 //	    return isAuthenticated;
 //	}
+	
+	public String getCashierName() {
+		return cashierName;
+	}
 	
 	private boolean authenticateUser(String email, String password) {
 	    boolean isAuthenticated = false;
