@@ -10,12 +10,14 @@ public class ReceiptPrinter implements Printable {
     private String customerName;
     private int billNo;
     private double totalAmount;
+    private String cashierName; // New field for cashier's name
 
-    public ReceiptPrinter(JTable table, String customerName, int billNo, double totalAmount) {
+    public ReceiptPrinter(JTable table, String customerName, int billNo, double totalAmount, String cashierName) {
         this.table = table;
         this.customerName = customerName;
         this.billNo = billNo;
         this.totalAmount = totalAmount;
+        this.cashierName = cashierName;
     }
 
     @Override
@@ -26,10 +28,8 @@ public class ReceiptPrinter implements Printable {
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        
-        
-        
-     // Set the font for the heading
+
+        // Set the font for the heading
         Font originalFont = g2d.getFont();
         Font headingFont = new Font("Serif", Font.BOLD, 24);
         g2d.setFont(headingFont);
@@ -43,8 +43,6 @@ public class ReceiptPrinter implements Printable {
 
         // Reset the font to original
         g2d.setFont(originalFont);
-        
-        
 
         int y = 145;
 
@@ -52,7 +50,10 @@ public class ReceiptPrinter implements Printable {
         g.drawString("Bill No: " + billNo, 100, y += 20);
         g.drawString("Total Amount: " + totalAmount, 100, y += 20);
 
-        y += 40; // Space before table
+        // Print cashier's name at the end
+        g.drawString("Cashier: " + cashierName, 100, y += 40);
+
+        y += 20; // Space before table
 
         // Print table headers
         for (int i = 0; i < table.getColumnCount(); i++) {
@@ -83,4 +84,3 @@ public class ReceiptPrinter implements Printable {
         }
     }
 }
-
